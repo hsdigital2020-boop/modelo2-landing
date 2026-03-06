@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Propiedad — Apartamento en el Este</title>
+  <style>
+    :root{
+      --bg:#FFF7ED; --card:#fff; --text:#0F172A; --muted:#475569; --line:#E7E1D8;
+      --shadow:0 10px 30px rgba(15,23,42,.08); --shadow-sm:0 6px 18px rgba(15,23,42,.08);
+      --wa:#22C55E; --wa-dark:#16A34A; --radius:18px; --container:1200px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--text);
+      background:radial-gradient(1200px 700px at 10% -10%, rgba(34,197,94,.10), transparent 60%),
+                 radial-gradient(1200px 700px at 90% -10%, rgba(15,23,42,.06), transparent 55%), var(--bg);}
+    a{color:inherit}
+    .wrap{max-width:var(--container);margin:0 auto;padding:0 24px}
+
+    /* Topbar */
+    .topbar{position:sticky;top:0;z-index:20;backdrop-filter:saturate(140%) blur(10px);
+      background:rgba(255,247,237,.75);border-bottom:1px solid rgba(231,225,216,.7);}
+    .topbar .inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:900}
+    .brand-logo{width:72px;height:auto;border:none;box-shadow:none;background:transparent;padding:0;display:block;object-fit:contain}
+    .searchbar{display:flex;gap:10px;align-items:center;min-width:min(520px,100%)}
+    .field{flex:1;display:flex;gap:10px;align-items:center;background:#fff;border:1px solid rgba(231,225,216,.9);
+      border-radius:14px;padding:12px 14px;box-shadow:0 2px 10px rgba(15,23,42,.06)}
+    .field input{border:none;outline:none;width:100%;font-size:14px}
+    .pill{display:inline-flex;gap:8px;align-items:center;padding:12px 14px;border-radius:14px;background:#fff;
+      border:1px solid rgba(231,225,216,.9);box-shadow:0 2px 10px rgba(15,23,42,.06);font-weight:800;font-size:14px}
+
+    main{padding:28px 0 96px}
+    .header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+    h1{font-size:44px;letter-spacing:-.03em;margin:18px 0 6px}
+    .loc{color:var(--muted);margin:0 0 8px;font-size:18px}
+    .priceBadge{background:rgba(22,163,74,.15);border:1px solid rgba(22,163,74,.25);color:#166534;
+      padding:10px 14px;border-radius:14px;font-weight:900;font-size:18px}
+
+    .grid{display:grid;grid-template-columns:1.25fr .75fr;gap:16px;align-items:start;margin-top:14px}
+    .card{background:var(--card);border:1px solid rgba(231,225,216,.9);border-radius:var(--radius);box-shadow:var(--shadow-sm)}
+    .mainImg{border-radius:16px;overflow:hidden}
+    .mainImg img{width:100%;height:420px;object-fit:cover;display:block}
+    .thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+    .thumbs img{width:100%;height:78px;object-fit:cover;border-radius:12px;border:1px solid rgba(231,225,216,.9);display:block}
+
+    .side{padding:16px}
+    .side h3{margin:0 0 10px;font-size:20px}
+    .basic{display:grid;gap:10px;margin-bottom:14px;color:var(--muted)}
+    .basic b{color:var(--text)}
+    .btn{display:inline-flex;justify-content:center;align-items:center;gap:10px;padding:14px 16px;border-radius:14px;
+      border:1px solid rgba(231,225,216,.95);background:#fff;text-decoration:none;font-weight:900;min-height:50px;width:100%}
+    .btn-wa{background:var(--wa);border-color:transparent;color:#fff}
+    .btn-wa:hover{background:var(--wa-dark)}
+    .note{color:var(--muted);font-size:13px;margin:12px 0 0}
+
+    .below{display:grid;grid-template-columns:1fr;gap:16px;margin-top:16px}
+    .desc{padding:18px}
+    .desc h3{margin:0 0 10px}
+    .desc p{margin:0;color:var(--muted);line-height:1.6;max-width:90ch}
+
+    .amen{padding:18px}
+    .amen h3{margin:0 0 12px}
+    .chips{display:flex;flex-wrap:wrap;gap:10px}
+    .chip{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:999px;
+      background:#fff;border:1px solid rgba(231,225,216,.9);box-shadow:0 2px 10px rgba(15,23,42,.05);font-weight:800;color:#334155;font-size:13px}
+
+    /* CTA fijo en móvil */
+    .stickyCta{
+      position:fixed;left:0;right:0;bottom:0;z-index:50;
+      background:rgba(255,247,237,.85);backdrop-filter:blur(10px);
+      border-top:1px solid rgba(231,225,216,.8);
+      padding:12px 16px;
+      display:none;
+    }
+    .stickyCta .wrap{padding:0}
+    .stickyCta a{max-width:var(--container);margin:0 auto;display:flex}
+    @media(max-width:980px){
+      .grid{grid-template-columns:1fr}
+      .mainImg img{height:320px}
+      .thumbs{grid-template-columns:repeat(4,1fr)}
+      h1{font-size:34px}
+      .stickyCta{display:block}
+      main{padding-bottom:140px}
+    }
+    
+  </style>
+</head>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const main = document.getElementById("mainPhoto");
+    if (!main) return;
+
+    document.querySelectorAll(".thumbs img").forEach((img) => {
+      img.style.cursor = "pointer";
+      img.addEventListener("click", () => {
+        main.src = img.src;
+      });
+    });
+  });
+</script>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <div class="inner">
+        <a class="brand" href="index.html" aria-label="Volver al inicio">
+          <img class="brand-logo" src="assets/logo.png" alt="Logo">
+          <span>Tu Marca</span>
+        </a>
+        <div class="searchbar" aria-label="Buscar y filtrar">
+          <div class="field">🔎 <input placeholder="Buscar..." /></div>
+          <div class="pill">Filtro ▾</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <div class="header">
+      <div>
+        <h1>Apartamento en el Este</h1>
+        <p class="loc">Urbanización del Este • Barquisimeto</p>
+      </div>
+      <div class="priceBadge">$85.000</div>
+    </div>
+
+    <section class="grid">
+      <!-- Izquierda: imagen + thumbs + descripción + amenidades -->
+      <div>
+        <div class="card" style="padding:16px">
+          <div class="mainImg">
+            <img id="mainPhoto" src="assets/prop-apto.png" alt="Imagen principal del apartamento">
+          </div>
+
+          <!-- Thumbs (puedes reemplazar por fotos reales interiores cuando las tengas) -->
+          <div class="thumbs" aria-label="Galería de imágenes">
+  <img src="assets/thumb-living.png" alt="Sala">
+  <img src="assets/thumb-kitchen.png" alt="Cocina y comedor">
+  <img src="assets/thumb-bedroom.png" alt="Habitación principal">
+  <img src="assets/thumb-bath.png" alt="Baño">
+</div>
+        </div>
+
+        <div class="card desc">
+          <h3>Descripción</h3>
+          <p>
+            Apartamento luminoso y amplio en zona Este. Acabados modernos, excelente distribución y áreas sociales ideales.
+            Documentación lista para negociar. Agenda visita y te paso ubicación exacta por WhatsApp.
+          </p>
+        </div>
+
+        <div class="card amen">
+          <h3>Amenidades</h3>
+          <div class="chips">
+            <span class="chip">🚗 Estacionamiento</span>
+            <span class="chip">🛡️ Vigilancia</span>
+            <span class="chip">🏋️ Gimnasio</span>
+            <span class="chip">🏊 Piscina</span>
+            <span class="chip">🎉 Salón de fiestas</span>
+            <span class="chip">🌿 Áreas verdes</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Derecha: datos básicos + CTA -->
+      <aside class="card side">
+        <h3>Datos básicos</h3>
+        <div class="basic">
+          <div>📐 <b>120 m²</b></div>
+          <div>🛏️ <b>3 hab</b></div>
+          <div>🛁 <b>2 baños</b></div>
+        </div>
+
+                <div style="margin-top:14px">
+          <a class="btn" href="listado.html">← Volver al listado</a>
+        </div>
+      </aside>
+    </section>
+  </main>
+<div class="card" style="padding:18px; text-align:center;">
+  <a class="btn btn-wa" style="max-width:520px; margin:0 auto;"
+     href="https://wa.me/584126563284?text=Hola%2C%20quiero%20agendar%20una%20visita%20al%20Apartamento%20en%20el%20Este."
+     target="_blank" rel="noopener">
+    💬 Agendar visita por WhatsApp
+  </a>
+</div>
+  <!-- CTA fijo en móvil -->
+  <div class="stickyCta">
+    <div class="wrap">
+      <a class="btn btn-wa" href="https://wa.me/584126563284?text=Hola%2C%20quiero%20agendar%20una%20visita%20al%20Apartamento%20en%20el%20Este." target="_blank" rel="noopener">
+        💬 Agendar Visita por WhatsApp
+      </a>
+    </div>
+  </div>
+</body>
+</html>

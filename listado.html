@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Listado de Propiedades — Tu Marca</title>
+  <style>
+    :root{
+      --bg:#FFF7ED; --card:#fff; --text:#0F172A; --muted:#475569; --line:#E7E1D8;
+      --shadow:0 10px 30px rgba(15,23,42,.08); --shadow-sm:0 6px 18px rgba(15,23,42,.08);
+      --wa:#22C55E; --wa-dark:#16A34A; --radius:18px; --container:1200px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--text);
+      background:radial-gradient(1200px 700px at 10% -10%, rgba(34,197,94,.10), transparent 60%),
+                 radial-gradient(1200px 700px at 90% -10%, rgba(15,23,42,.06), transparent 55%), var(--bg);}
+    a{color:inherit}
+    .wrap{max-width:var(--container);margin:0 auto;padding:0 24px}
+
+    /* Topbar (igual idea) */
+    .topbar{position:sticky;top:0;z-index:20;backdrop-filter:saturate(140%) blur(10px);
+      background:rgba(255,247,237,.75);border-bottom:1px solid rgba(231,225,216,.7);}
+    .topbar .inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:900}
+    .brand-logo{width:72px;height:auto;border:none;box-shadow:none;background:transparent;padding:0;display:block;object-fit:contain}
+    .searchbar{display:flex;gap:10px;align-items:center;min-width:min(520px,100%)}
+    .field{flex:1;display:flex;gap:10px;align-items:center;background:#fff;border:1px solid rgba(231,225,216,.9);
+      border-radius:14px;padding:12px 14px;box-shadow:0 2px 10px rgba(15,23,42,.06)}
+    .field input{border:none;outline:none;width:100%;font-size:14px}
+    .pill{display:inline-flex;gap:8px;align-items:center;padding:12px 14px;border-radius:14px;background:#fff;
+      border:1px solid rgba(231,225,216,.9);box-shadow:0 2px 10px rgba(15,23,42,.06);font-weight:800;font-size:14px}
+
+    /* Layout */
+    main{padding:36px 0 72px}
+    h1{font-size:44px;letter-spacing:-.03em;margin:18px 0 10px}
+    .sub{color:var(--muted);margin:0 0 22px;max-width:70ch}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{background:var(--card);border:1px solid rgba(231,225,216,.9);border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden}
+    .img{width:100%;height:190px;object-fit:cover;display:block;background:#F3F4F6}
+    .body{padding:14px}
+    .title{font-weight:900;margin:0 0 6px}
+    .price{color:#16A34A;font-weight:900;font-size:18px;margin:0 0 8px}
+    .meta{color:var(--muted);font-size:13px;display:flex;gap:10px;flex-wrap:wrap;margin:0 0 12px}
+    .btnrow{display:grid;gap:10px}
+    .btn{display:inline-flex;justify-content:center;align-items:center;gap:10px;padding:14px 16px;border-radius:14px;
+      border:1px solid rgba(231,225,216,.95);background:#fff;text-decoration:none;font-weight:900;min-height:50px}
+    .btn-wa{background:var(--wa);border-color:transparent;color:#fff}
+    .btn-wa:hover{background:var(--wa-dark)}
+    .btn-ghost{background:transparent;border-color:rgba(71,85,105,.20)}
+    .center{display:flex;justify-content:center;margin-top:18px}
+
+    /* Placeholder cards */
+    .ph .img{height:190px;background:linear-gradient(135deg, rgba(15,23,42,.10), rgba(15,23,42,.03))}
+    .ph .lines{padding:14px}
+    .line{height:10px;border-radius:999px;background:rgba(15,23,42,.10);margin:10px 0}
+    .line.sm{width:55%} .line.md{width:72%} .line.lg{width:90%}
+    .tagpill{display:inline-flex;padding:10px 12px;border-radius:12px;border:1px solid rgba(231,225,216,.9);background:#fff;font-weight:900}
+
+    @media(max-width:980px){
+      .searchbar{min-width:0}
+      .grid{grid-template-columns:1fr}
+      h1{font-size:34px}
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <div class="inner">
+        <a class="brand" href="index.html" aria-label="Volver al inicio">
+          <img class="brand-logo" src="assets/logo.png" alt="Logo">
+          <span>Tu Marca</span>
+        </a>
+
+        <div class="searchbar" aria-label="Buscar y filtrar">
+          <div class="field">
+            🔎 <input placeholder="Buscar..." />
+          </div>
+          <div class="pill">Filtro ▾</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <h1>Listado de Propiedades Disponibles</h1>
+    <p class="sub">Propiedades verificadas y listas para negociar. Agenda una visita por WhatsApp o entra a ver los detalles.</p>
+
+    <section class="grid">
+      <!-- 3 reales -->
+      <article class="card">
+        <img class="img" src="assets/prop-apto.png" alt="Apartamento">
+        <div class="body">
+          <div class="title">Apartamento • Este</div>
+          <div class="price">$85.000</div>
+          <div class="meta">120 m² • 3 hab • 2 baños</div>
+          <div class="btnrow">
+            <a class="btn btn-wa" href="https://wa.me/584126563284?text=Hola%2C%20quiero%20agendar%20una%20visita%20al%20Apartamento%20en%20el%20Este." target="_blank" rel="noopener">💬 Agendar visita por WhatsApp</a>
+            <a class="btn btn-ghost" href="propiedad.html">Ver detalles</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img class="img" src="assets/prop-casa.png" alt="Casa">
+        <div class="body">
+          <div class="title">Casa • Oeste</div>
+          <div class="price">$125.000</div>
+          <div class="meta">180 m² • 4 hab • 3 baños</div>
+          <div class="btnrow">
+            <a class="btn btn-wa" href="https://wa.me/584126563284?text=Hola%2C%20quiero%20agendar%20una%20visita%20a%20la%20Casa%20en%20el%20Oeste." target="_blank" rel="noopener">💬 Agendar visita por WhatsApp</a>
+            <a class="btn btn-ghost" href="propiedad.html">Ver detalles</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img class="img" src="assets/prop-townhouse.png" alt="Townhouse">
+        <div class="body">
+          <div class="title">Townhouse • Centro</div>
+          <div class="price">$95.000</div>
+          <div class="meta">150 m² • 3 hab • 2 baños</div>
+          <div class="btnrow">
+            <a class="btn btn-wa" href="https://wa.me/584126563284?text=Hola%2C%20quiero%20agendar%20una%20visita%20al%20Townhouse%20en%20el%20Centro." target="_blank" rel="noopener">💬 Agendar visita por WhatsApp</a>
+            <a class="btn btn-ghost" href="propiedad.html">Ver detalles</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- placeholders (estilo wireframe) -->
+      <article class="card ph">
+        <div class="img"></div>
+        <div class="lines">
+          <div class="line lg"></div>
+          <div class="line md"></div>
+          <div class="line sm"></div>
+          <div style="margin-top:14px"><span class="tagpill">Ver detalles</span></div>
+        </div>
+      </article>
+
+      <article class="card ph">
+        <div class="img"></div>
+        <div class="lines">
+          <div class="line lg"></div>
+          <div class="line md"></div>
+          <div class="line sm"></div>
+          <div style="margin-top:14px"><span class="tagpill">Ver detalles</span></div>
+        </div>
+      </article>
+
+      <article class="card ph">
+        <div class="img"></div>
+        <div class="lines">
+          <div class="line lg"></div>
+          <div class="line md"></div>
+          <div class="line sm"></div>
+          <div style="margin-top:14px"><span class="tagpill">Ver detalles</span></div>
+        </div>
+      </article>
+    </section>
+
+    <div class="center">
+      <a class="btn btn-ghost" href="#">Ver más propiedades ▾</a>
+    </div>
+  </main>
+</body>
+</html>

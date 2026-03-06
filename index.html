@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Modelo 2 — Landing Inmobiliaria</title>
+  <meta name="description" content="Landing inmobiliaria de alta captación con CTA a WhatsApp." />
+  <style>
+    :root{
+      --bg:#FFF7ED;
+      --card:#FFFFFF;
+      --text:#0F172A;
+      --muted:#475569;
+      --line:#E7E1D8;
+      --shadow:0 10px 30px rgba(15,23,42,.08);
+      --shadow-sm:0 6px 18px rgba(15,23,42,.08);
+      --wa:#22C55E;
+      --wa-dark:#16A34A;
+      --radius:18px;
+      --container:1200px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 10% -10%, rgba(34,197,94,.10), transparent 60%),
+        radial-gradient(1200px 700px at 90% -10%, rgba(15,23,42,.06), transparent 55%),
+        var(--bg);
+      line-height:1.35;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--container); margin:0 auto; padding:0 24px}
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter:saturate(140%) blur(10px);
+      background:rgba(255,247,237,.75);
+      border-bottom:1px solid rgba(231,225,216,.7);
+    }
+    .topbar .inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:5px 0;
+      gap:10px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      text-decoration:none;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .brand-logo{
+      width:110px;
+      height:auto;
+      border-radius:0;
+      background:transparent;
+      border:none;
+      box-shadow:none;
+      padding:0;
+      object-fit:contain;
+      display:block;
+    }
+    .brand-name{font-weight:700}
+    .social{display:flex; align-items:center; gap:10px;}
+    .icon{
+      width:34px; height:34px; border-radius:999px;
+      border:1px solid rgba(231,225,216,.9);
+      background:#fff;
+      display:grid; place-items:center;
+      box-shadow:0 2px 10px rgba(15,23,42,.06);
+      text-decoration:none;
+      overflow:hidden;
+    }
+    .icon img{
+      width:30px; height:30px;
+      object-fit:contain;
+      display:block;
+      opacity:.9;
+    }
+
+    /* Sections */
+    section{padding:64px 0}
+    .section-title{
+      font-size:34px; margin:0 0 10px 0;
+      letter-spacing:-.02em;
+    }
+    .section-sub{
+      color:var(--muted);
+      margin:0 0 28px 0;
+      max-width:72ch;
+    }
+    .card{
+      background:var(--card);
+      border:1px solid rgba(231,225,216,.9);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow-sm);
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(34,197,94,.10);
+      border:1px solid rgba(34,197,94,.25);
+      color:#166534;
+      font-weight:600;
+      font-size:13px;
+    }
+    .btn-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:14px 18px;
+      border-radius:14px;
+      border:1px solid rgba(231,225,216,.95);
+      background:#fff;
+      text-decoration:none;
+      font-weight:800;
+      box-shadow:0 6px 20px rgba(15,23,42,.06);
+      transition:transform .08s ease, box-shadow .2s ease, background .2s ease;
+      min-height:52px;
+    }
+    .btn:hover{transform:translateY(-1px); box-shadow:0 10px 26px rgba(15,23,42,.10)}
+    .btn:active{transform:translateY(0)}
+    .btn-wa{background:var(--wa); border-color:transparent; color:#fff;}
+    .btn-wa:hover{background:var(--wa-dark)}
+    .btn-ghost{background:transparent; border-color:rgba(71,85,105,.20); box-shadow:none;}
+    .micro{
+      display:flex; gap:18px; flex-wrap:wrap;
+      color:var(--muted); font-size:13px;
+      margin-top:12px;
+    }
+    .micro span{display:inline-flex; align-items:center; gap:8px;}
+    .dot{width:8px; height:8px; border-radius:999px; background:rgba(34,197,94,.55); box-shadow:0 0 0 4px rgba(34,197,94,.12);}
+
+    /* HERO */
+    .hero{padding:46px 0 18px 0;}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:28px;
+      align-items:center;
+    }
+    .hero h1{
+      font-size:54px; line-height:1.02;
+      letter-spacing:-.04em;
+      margin:14px 0 12px 0;
+    }
+    .hero p{color:var(--muted); font-size:17px; margin:0; max-width:60ch;}
+    .hero-visual{
+      min-height:360px;
+      border-radius:22px;
+      border:1px solid rgba(231,225,216,.95);
+      background:#F3F4F6;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-img{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      object-fit:cover; object-position:center;
+      filter:saturate(1.05) contrast(1.03);
+    }
+    .hero-visual .label{
+      position:absolute; inset:auto 18px 18px 18px;
+      background:rgba(255,255,255,.85);
+      border:1px solid rgba(231,225,216,.9);
+      border-radius:16px;
+      padding:14px 14px;
+      display:flex; align-items:flex-start; gap:12px;
+      box-shadow:0 10px 30px rgba(15,23,42,.12);
+    }
+    .wa-bubble{
+      width:40px; height:40px; border-radius:14px;
+      display:grid; place-items:center;
+      background:rgba(34,197,94,.12);
+      border:1px solid rgba(34,197,94,.25);
+      color:#166534;
+      font-weight:900;
+    }
+    .label b{display:block; margin-bottom:4px}
+    .label small{color:var(--muted)}
+    .divider{height:1px; background:rgba(231,225,216,.9); margin-top:40px;}
+
+    /* Properties */
+    .grid-3{display:grid; grid-template-columns: repeat(3, 1fr); gap:16px;}
+    .prop{overflow:hidden; border-radius:18px;}
+    .prop-img{width:100%; height:168px; object-fit:cover; display:block;}
+    .prop .body{padding:14px 14px 16px 14px}
+    .prop .meta{color:var(--muted); font-size:13px; margin-top:8px; display:flex; gap:10px; flex-wrap:wrap}
+    .price{color:#16A34A; font-weight:900; font-size:18px; margin-top:6px}
+    .prop .title{font-weight:900}
+    .center{display:flex; justify-content:center; margin-top:18px}
+
+    /* About */
+    .about{display:grid; grid-template-columns: .9fr 1.1fr; gap:18px; align-items:center; padding:22px;}
+    .agent-photo{
+      width:170px; height:170px; border-radius:999px;
+      object-fit:cover;
+      border:1px solid rgba(231,225,216,.95);
+      box-shadow:0 10px 30px rgba(15,23,42,.10);
+      display:block;
+      margin:10px auto;
+      background:#fff;
+    }
+    .bullets{margin:14px 0 0 0; padding:0; list-style:none; display:grid; gap:10px;}
+    .bullets li{display:flex; gap:10px; align-items:flex-start; color:var(--muted);}
+    .check{
+      width:22px; height:22px; border-radius:8px;
+      background:rgba(34,197,94,.14);
+      border:1px solid rgba(34,197,94,.25);
+      display:grid; place-items:center;
+      color:#166534; font-weight:900;
+      flex:0 0 auto;
+      margin-top:1px;
+    }
+
+    /* Testimonials */
+    .test-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;}
+    .tcard{padding:16px}
+    .t-top{display:flex; gap:10px; align-items:center; margin-bottom:10px}
+    .t-avatar-img{
+      width:60px; height:60px; border-radius:999px;
+      object-fit:cover;
+      border:1px solid rgba(231,225,216,.9);
+      display:block;
+    }
+    .stars{color:#16A34A; font-size:14px; letter-spacing:.8px}
+    .tag{
+      display:inline-flex; align-items:center;
+      padding:6px 10px; border-radius:999px;
+      background:rgba(15,23,42,.04);
+      border:1px solid rgba(231,225,216,.9);
+      color:#334155;
+      font-size:12px; font-weight:800;
+      margin-top:10px;
+    }
+    .quote{color:var(--muted); margin:0}
+
+    /* Services */
+    .two-col{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+    .svc{padding:18px}
+    .svc h3{margin:0 0 6px 0; font-size:20px}
+    .svc p{margin:0 0 12px 0; color:var(--muted)}
+    .svc ul{margin:0; padding-left:18px; color:var(--muted)}
+    .svc li{margin:8px 0}
+
+    /* Value prop */
+    .value{display:grid; grid-template-columns:1.1fr .9fr; gap:18px; align-items:center; padding:22px;}
+    .value h2{margin:0 0 10px 0; font-size:30px; letter-spacing:-.02em}
+    .value p{margin:0 0 12px 0; color:var(--muted)}
+
+    /* Credentials */
+    .cred{padding:18px}
+    .cred h3{margin:0 0 8px 0}
+    .logos{
+      display:flex; gap:12px; flex-wrap:wrap; margin-top:14px;
+      align-items:center;
+    }
+    .cred-logo{
+      height:80px; width:auto;
+      object-fit:contain;
+      background:#fff;
+      border:1px solid rgba(231,225,216,.9);
+      border-radius:12px;
+      padding:8px 10px;
+      box-shadow:0 6px 20px rgba(15,23,42,.06);
+    }
+
+    .cta-box{padding:18px}
+    .cta-box h3{margin:0 0 8px 0}
+    .cta-box p{margin:0 0 14px 0; color:var(--muted)}
+
+    footer{
+      padding:26px 0 36px;
+      color:#64748B;
+      font-size:12px;
+      border-top:1px solid rgba(231,225,216,.8);
+      background:rgba(255,255,255,.35);
+    }
+
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns:1fr; }
+      .hero h1{font-size:40px}
+      .hero-visual{min-height:280px}
+      .grid-3{grid-template-columns:1fr}
+      .test-grid{grid-template-columns:1fr}
+      .two-col{grid-template-columns:1fr}
+      .about{grid-template-columns:1fr}
+      .value{grid-template-columns:1fr}
+      section{padding:56px 0}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="wrap">
+      <div class="inner">
+
+        <!-- ✅ LOGO -->
+        <a class="brand" href="#hero" aria-label="Ir al inicio">
+          <img class="brand-logo" src="assets/logo.png" alt="Logo del asesor inmobiliario">
+          <span class="brand-name">Tu Marca</span>
+        </a>
+
+        <!-- ✅ ICONOS REDES -->
+        <div class="social" aria-label="Redes sociales">
+          <a class="icon" href="#" aria-label="Instagram">
+            <img src="assets/icon-instagram.png" alt="">
+          </a>
+          <a class="icon" href="#" aria-label="Facebook">
+            <img src="assets/icon-facebook.png" alt="">
+          </a>
+          <a class="icon" href="#" aria-label="LinkedIn">
+            <img src="assets/icon-linkedin.png" alt="">
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 1) HERO -->
+  <section class="hero" id="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="pill">Asesor inmobiliario en Barquisimeto</span>
+          <h1>Compra o vende con asesoría real (sin perder tiempo).</h1>
+          <p>Propiedades verificadas, negociación y acompañamiento hasta la firma. Te respondo rápido por WhatsApp y te indico el plan más directo según tu caso.</p>
+
+          <div class="btn-row">
+            <a class="btn btn-wa"
+               href="https://wa.me/584126563284?text=Hola%2C%20quiero%20una%20asesor%C3%ADa%20inmobiliaria."
+               target="_blank" rel="noopener">
+              💬 Escribir por WhatsApp
+            </a>
+            <a class="btn btn-ghost" href="#captaciones">Ver propiedades</a>
+          </div>
+
+          <div class="micro">
+            <span><i class="dot"></i> Respuesta en minutos</span>
+            <span><i class="dot"></i> Asesoría inicial gratuita</span>
+          </div>
+        </div>
+
+        <div class="hero-visual" role="img" aria-label="Agente inmobiliario atendiendo por WhatsApp">
+          <img class="hero-img" src="assets/agent-hero.png" alt="Agente inmobiliario en un entorno residencial, usando su teléfono">
+          <div class="label">
+            <div class="wa-bubble">WA</div>
+            <div>
+              <b>¿Listo para avanzar?</b>
+              <small>“Hola, quiero vender/comprar y necesito asesoría.”</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+    </div>
+  </section>
+
+  <!-- 2) ÚLTIMAS CAPTACIONES -->
+  <section id="captaciones">
+    <div class="wrap">
+      <h2 class="section-title">Últimas captaciones</h2>
+      <p class="section-sub">Propiedades verificadas y listas para negociar.</p>
+
+      <div class="grid-3">
+        <article class="card prop">
+          <img class="prop-img" src="assets/prop-apto.png" alt="Apartamento moderno">
+          <div class="body">
+            <div class="title">Apartamento • Este</div>
+            <div class="price">$85.000</div>
+            <div class="meta">120 m² • 3 hab • 2 baños</div>
+            <div class="btn-row" style="margin-top:12px">
+              <!-- ✅ Conecta a single -->
+              <a class="btn" href="propiedad.html" aria-label="Ver detalles">Ver detalles</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card prop">
+          <img class="prop-img" src="assets/prop-casa.png" alt="Casa moderna">
+          <div class="body">
+            <div class="title">Casa • Oeste</div>
+            <div class="price">$125.000</div>
+            <div class="meta">180 m² • 4 hab • 3 baños</div>
+            <div class="btn-row" style="margin-top:12px">
+              <!-- ✅ Conecta a single -->
+              <a class="btn" href="propiedad.html" aria-label="Ver detalles">Ver detalles</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card prop">
+          <img class="prop-img" src="assets/prop-townhouse.png" alt="Townhouse moderno">
+          <div class="body">
+            <div class="title">Townhouse • Centro</div>
+            <div class="price">$95.000</div>
+            <div class="meta">150 m² • 3 hab • 2 baños</div>
+            <div class="btn-row" style="margin-top:12px">
+              <!-- ✅ Conecta a single -->
+              <a class="btn" href="propiedad.html" aria-label="Ver detalles">Ver detalles</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="center">
+        <!-- ✅ Conecta a listing -->
+        <a class="btn btn-ghost" href="listado.html" aria-label="Ver todas las propiedades">Ver todos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3) ACERCA DE -->
+  <section id="acerca">
+    <div class="wrap">
+      <div class="card about">
+        <div style="text-align:center">
+          <img class="agent-photo" src="assets/agent-about.png" alt="Foto del agente inmobiliario">
+        </div>
+
+        <div>
+          <h2 class="section-title" style="margin:0 0 6px 0">Acerca de mí</h2>
+          <p class="section-sub" style="margin:0 0 10px 0">
+            Soy <b>[Nombre]</b>, asesor inmobiliario especializado en Barquisimeto. Te ayudo a comprar o vender con seguridad: filtro opciones reales, valido documentos y negocio para que cierres bien.
+          </p>
+
+          <ul class="bullets">
+            <li><span class="check">✓</span> <span><b>Acompañamiento 1:1</b><br><span style="font-size:13px">Atención personalizada en cada paso del proceso.</span></span></li>
+            <li><span class="check">✓</span> <span><b>Validación documental</b><br><span style="font-size:13px">Revisión de documentos y legalidad antes de avanzar.</span></span></li>
+            <li><span class="check">✓</span> <span><b>Negociación y cierre</b><br><span style="font-size:13px">Busco las mejores condiciones para ti.</span></span></li>
+          </ul>
+
+          <div class="btn-row">
+            <a class="btn btn-wa"
+               href="https://wa.me/584126563284?text=Hola%2C%20quiero%20una%20asesor%C3%ADa%20inmobiliaria."
+               target="_blank" rel="noopener">
+              💬 Hablar por WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4) PRUEBA SOCIAL -->
+  <section id="testimonios">
+    <div class="wrap">
+      <h2 class="section-title">Lo que dicen mis clientes</h2>
+      <p class="section-sub">Testimonios reales de personas que confiaron en mi asesoría.</p>
+
+      <div class="test-grid">
+        <div class="card tcard">
+          <div class="t-top">
+            <img class="t-avatar-img" src="assets/avatar-maria.png" alt="Foto de perfil de María P.">
+            <div>
+              <div style="font-weight:900">María P.</div>
+              <div class="stars">★★★★★</div>
+            </div>
+          </div>
+          <p class="quote">“Vendimos en 21 días. Filtró visitas, llevó el seguimiento y negoció excelente. Todo claro por WhatsApp.”</p>
+          <span class="tag">Venta</span>
+        </div>
+
+        <div class="card tcard">
+          <div class="t-top">
+            <img class="t-avatar-img" src="assets/avatar-carlos.png" alt="Foto de perfil de Carlos R.">
+            <div>
+              <div style="font-weight:900">Carlos R.</div>
+              <div class="stars">★★★★★</div>
+            </div>
+          </div>
+          <p class="quote">“Proceso ordenado y sin sorpresas. Me ayudó con documentos y cierre. Recomendado 100%.”</p>
+          <span class="tag">Compra</span>
+        </div>
+
+        <div class="card tcard">
+          <div class="t-top">
+            <img class="t-avatar-img" src="assets/avatar-andrea.png" alt="Foto de perfil de Andrea G.">
+            <div>
+              <div style="font-weight:900">Andrea G.</div>
+              <div class="stars">★★★★★</div>
+            </div>
+          </div>
+          <p class="quote">“Encontré justo lo que buscaba. Respuesta rápida y acompañamiento real en todo momento.”</p>
+          <span class="tag">Compra</span>
+        </div>
+      </div>
+
+      <div class="center">
+        <a class="btn btn-wa"
+           href="https://wa.me/584126563284?text=Hola%2C%20quiero%20una%20asesor%C3%ADa%20inmobiliaria."
+           target="_blank" rel="noopener">
+          💬 Quiero una asesoría por WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5) SERVICIOS -->
+  <section id="servicios">
+    <div class="wrap">
+      <h2 class="section-title">Servicios</h2>
+      <p class="section-sub">Dos caminos, un mismo objetivo: que cierres bien (con seguridad y estrategia).</p>
+
+      <div class="two-col">
+        <div class="card svc">
+          <h3>Intermediación y comercialización de inmuebles</h3>
+          <p>Si vas a vender o alquilar, te ayudo a atraer clientes reales y cerrar con respaldo.</p>
+          <ul>
+            <li>Fotos y descripción que posicionan tu propiedad</li>
+            <li>Difusión en canales correctos (premium si aplica)</li>
+            <li>Precalificación de interesados y gestión de visitas</li>
+            <li>Negociación y acompañamiento hasta el cierre</li>
+          </ul>
+          <div class="btn-row">
+            <a class="btn btn-wa"
+               href="https://wa.me/584126563284?text=Hola%2C%20quiero%20vender%20o%20alquilar%20una%20propiedad."
+               target="_blank" rel="noopener">
+              💬 Quiero vender por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="card svc">
+          <h3>Asesoría inmobiliaria para comprar con seguridad</h3>
+          <p>Te acompaño a elegir bien, evitar riesgos y negociar el mejor acuerdo posible.</p>
+          <ul>
+            <li>Búsqueda guiada según presupuesto y zona</li>
+            <li>Comparación de opciones (precio, estado, papeles)</li>
+            <li>Verificación documental y validación de datos clave</li>
+            <li>Acompañamiento en negociación y firma</li>
+          </ul>
+          <div class="btn-row">
+            <a class="btn btn-wa"
+               href="https://wa.me/584126563284?text=Hola%2C%20quiero%20asesor%C3%ADa%20para%20comprar%20una%20propiedad."
+               target="_blank" rel="noopener">
+              💬 Quiero asesoría por WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6) PROPUESTA DE VALOR -->
+  <section id="valor">
+    <div class="wrap">
+      <div class="card value">
+        <div>
+          <h2>¿Por qué trabajar conmigo?</h2>
+          <p>Porque tu operación debe ser simple: claridad, respuesta rápida y un proceso que cierre bien.</p>
+          <ul class="bullets">
+            <li><span class="check">✓</span> <span><b>Propiedades verificadas</b><br><span style="font-size:13px;color:var(--muted)">Menos pérdida de tiempo y más decisiones seguras.</span></span></li>
+            <li><span class="check">✓</span> <span><b>Comunicación directa por WhatsApp</b><br><span style="font-size:13px;color:var(--muted)">Seguimiento claro y respuestas rápidas.</span></span></li>
+            <li><span class="check">✓</span> <span><b>Negociación enfocada en tu beneficio</b><br><span style="font-size:13px;color:var(--muted)">Busco condiciones favorables y cierre ordenado.</span></span></li>
+            <li><span class="check">✓</span> <span><b>Acompañamiento hasta la firma</b><br><span style="font-size:13px;color:var(--muted)">Te llevo paso a paso, sin sorpresas.</span></span></li>
+          </ul>
+
+          <div class="btn-row">
+            <a class="btn btn-wa"
+               href="https://wa.me/584126563284?text=Hola%2C%20quiero%20agendar%20una%20asesor%C3%ADa%20gratuita."
+               target="_blank" rel="noopener">
+              💬 Agenda tu asesoría por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual" style="min-height:320px" role="img" aria-label="Imagen del agente">
+          <img class="hero-img" src="assets/agent-hero2.png" alt="Agente inmobiliario en un entorno residencial">
+          <div class="label">
+            <div class="wa-bubble">✓</div>
+            <div>
+              <b>Proceso claro</b>
+              <small>De la búsqueda a la firma, contigo.</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 7) CREDENCIALES + CTA FINAL -->
+  <section id="cta-final">
+    <div class="wrap">
+      <div class="two-col">
+        <div class="card cred">
+          <h2>Credenciales y respaldo</h2>
+          <p class="section-sub" style="margin:0">Afiliaciones y formación continua para operar con estándares y buenas prácticas.</p>
+
+          <div class="logos" aria-label="Logos de organizaciones">
+            <img class="cred-logo" src="assets/cred-camara-inmobiliaria.png" alt="Cámara Inmobiliaria">
+            <img class="cred-logo" src="assets/cred-asociuven.png" alt="ASOCIUVEN">
+            <img class="cred-logo" src="assets/cred-ucla.png" alt="Certificación UCLA">
+          </div>
+        </div>
+
+        <div class="card cta-box">
+          <h2>Agenda tu asesoría gratuita</h2>
+          <p>Cuéntame qué buscas o qué necesitas vender. Te respondo por WhatsApp y te digo el plan más directo para tu caso.</p>
+          <div class="btn-row">
+            <a class="btn btn-wa"
+               href="https://wa.me/584126563284?text=Hola%2C%20quiero%20agendar%20una%20asesor%C3%ADa%20gratuita."
+               target="_blank" rel="noopener">
+              💬 Agenda tu asesoría por WhatsApp
+            </a>
+          </div>
+          <div class="micro" style="margin-top:10px">
+            <span><i class="dot"></i> Sin compromiso</span>
+            <span><i class="dot"></i> Cupos semanales limitados</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      Modelo 2 — Wireframe presentable (HTML/CSS). Reemplaza: [Nombre], enlaces, precios y logos.
+    </div>
+  </footer>
+</body>
+</html>
